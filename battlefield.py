@@ -1,17 +1,5 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
-
-"""
-ZetCode Tkinter tutorial
-
-This script shows a simple window
-on the screen.
-
-author: Jan Bodnar
-last modified: January 2011
-website: www.zetcode.com
-"""
-
 from Tkinter import Tk, W, E
 from ttk import Frame, Label, Style
 from ttk import Entry
@@ -46,8 +34,8 @@ class Battleship(Frame):
     def callback(self, event):
         #x = Label(self, text="  jee  ", background="red")
         #x.grid(row=i, column=j)
-        event.widget["foreground"] = "red"#.config(background='red')
-        event.widget["text"] = "haaaaaaalo"
+        event.widget["background"] = "red"#.config(background='red')
+        #event.widget["text"] = "haaaaaaalo"
         print("hallo")
 
 def main():
