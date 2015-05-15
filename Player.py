@@ -23,6 +23,23 @@ class Player():
 		else:
 			cell.color.config(background="blue")
         
+	def setUpShips(self):
+		vertical = randint(0,1)
+		if vertical:
+			y = randint(0,8)
+			x = randint(0,9)
+			self.ocean[x][y].isShip = True
+			self.ocean[x][y].color = "grey"
+			self.ocean[x][y+1].isShip = True
+			self.ocean[x][y+1].color = "grey"
+		else:
+			x = randint(0,8)
+			y = randint(0,9)
+			self.ocean[x][y].isShip = True
+			self.ocean[x][y].color = "grey"
+			self.ocean[x+1][y].isShip = True
+			self.ocean[x+1][y].color = "grey"
+
 	
 class ComputerPlayer(Player):
 	
