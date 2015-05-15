@@ -1,7 +1,7 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
-from Tkinter import Tk, W, E
-from ttk import Frame, Label, Style
+from Tkinter import Tk, W, E, PhotoImage, Label, RAISED
+from ttk import Frame, Style
 from ttk import Entry
 
 class Battleship(Frame):
@@ -17,8 +17,6 @@ class Battleship(Frame):
 
         self.parent.title("Battleship")
 
-        Style().configure("TCheckbutton", padding=(2, 2, 2, 2), font='serif 10')
-
         for i in range(10):
             self.columnconfigure(i)
             self.rowconfigure(i)
@@ -26,22 +24,18 @@ class Battleship(Frame):
         entry = Entry(self)
         for i in range(10):
             for j in range(10):
-                x = Label(self, text="  iii  ")
+                k = (i,j)
+                x = Label(self, relief=RAISED, width=8, height=3, padx=3, pady=3)
                 x.bind("<Button-1>", self.callback)
                 x.grid(row=i, column=j)
         self.pack()
 
     def callback(self, event):
-        #x = Label(self, text="  jee  ", background="red")
-        #x.grid(row=i, column=j)
-        event.widget["background"] = "red"#.config(background='red')
-        #event.widget["text"] = "haaaaaaalo"
-        print("hallo")
+        event.widget["background"] = "red"
 
 def main():
 
     root = Tk()
-    #root.geometry("250x150+300+300")
     app = Battleship(root)
     root.mainloop()  
 
