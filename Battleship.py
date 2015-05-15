@@ -4,7 +4,7 @@ from Tkinter import Tk, W, E, Label, RAISED
 from ttk import Frame, Style
 from ttk import Entry
 from time import sleep
-import Player
+from Player import Player
 from Cell import Cell
 
 class Battleship(Frame):
@@ -13,8 +13,8 @@ class Battleship(Frame):
         Frame.__init__(self, parent)   
 
         self.parent = parent
-        self.player1 = Player.Player()
-        self.player2 = Player.ComputerPlayer()
+        self.player1 = Player()
+        self.player2 = ComputerPlayer()
         self.initUI()
 
     def initUI(self):
