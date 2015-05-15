@@ -22,6 +22,7 @@ class Player():
 			cell.color.config(background="red")
 		else:
 			cell.color.config(background="blue")
+        
 	
 class ComputerPlayer(Player):
 	
