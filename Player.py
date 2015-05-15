@@ -29,16 +29,16 @@ class Player():
 			y = randint(0,8)
 			x = randint(0,9)
 			self.ocean[x][y].isShip = True
-			self.ocean[x][y].color = "grey"
+			self.ocean[x][y].color.config(background = "grey")
 			self.ocean[x][y+1].isShip = True
-			self.ocean[x][y+1].color = "grey"
+			self.ocean[x][y+1].color.config(background = "grey")
 		else:
 			x = randint(0,8)
 			y = randint(0,9)
 			self.ocean[x][y].isShip = True
-			self.ocean[x][y].color = "grey"
+			self.ocean[x][y].color.config(background = "grey")
 			self.ocean[x+1][y].isShip = True
-			self.ocean[x+1][y].color = "grey"
+			self.ocean[x+1][y].color.config(background = "grey")
 
 	
 class ComputerPlayer(Player):

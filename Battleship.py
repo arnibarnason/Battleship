@@ -52,8 +52,8 @@ class Battleship(Frame):
                 self.player1.addCellToOcean(cell, i)
         self.pack()
 
-        player1.setUpShips()
-        player2.setUpShips()
+        self.player1.setUpShips()
+        self.player2.setUpShips()
 
     def callback(self, event, pos):
         self.player2.underAttack(pos)
