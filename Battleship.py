@@ -12,15 +12,13 @@ class Battleship(Frame):
         Frame.__init__(self, parent)   
 
         self.parent = parent
-
+        self.player1 = Player.Player()
+        self.player2 = Player.ComputerPlayer()
         self.initUI()
 
     def initUI(self):
 
         self.parent.title("Battleship")
-
-        player1 = Player()
-        player2 = ComputerPlayer()
 
         for i in range(10):
             self.columnconfigure(i)
@@ -51,10 +49,10 @@ class Battleship(Frame):
         self.pack()
 
     def callback(self, event, pos):
-        color = "red"#player2.underAttack(pos)
+        color = self.player2.underAttack(pos)
         event.widget["background"] = color
-        time.sleep(3)
-        player1.underAttack()
+        #sleep(3)
+        #self.player1.underAttack()
 
 def main():
 
