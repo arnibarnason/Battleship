@@ -1,21 +1,27 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
-from Battleship import Battleship
+#from Battleship import Battleship
 from Cell import Cell
-
+from random import randint
 class Player():
 	
 	def __init__(self):
 		self.hits = 0
 		self.health = 17
-		self.grid = self.initGrid()
+		self.ocean = [[] for i in range(10)]
 
-	def initGrid(self):
-		grid = [[] for i in range(10)]
-		for i in range(10):
-			for j in range(10):
-				grid[i].append(Cell(False, False))
-		return grid
+	def addCellToOcean(self, cell, x):
+		self.ocean[x].append(cell)
+	
+	def underAttack(self):
+		x = randint(0,9)
+		y = randint(0,9)
+		cell = self.ocean[x][y]
+		cell.isHit = True
+		if cell.isShip:
+			cell.color.config(background="red")
+		else:
+			cell.color.config(background="blue")
 	
 class ComputerPlayer(Player):
 	
@@ -25,11 +31,11 @@ class ComputerPlayer(Player):
 	def underAttack(self, coordinates):
 		x = coordinates[0]
 		y = coordinates[1]
-                #print("grid: ", self.grid, "x: ", x, "y: ", y)
-		self.grid[x][y].isHit = True
-		#print(self.grid[x][y].isShip)
-                if self.grid[x][y].isShip:
-                    return "red"
-                return "blue"
+		cell = self.ocean[x][y]
+		cell.isHit = True
+		if cell.isShip:
+			cell.color.config(background="red")	
+		else:
+			cell.color.config(background="blue")	
 			
 	
