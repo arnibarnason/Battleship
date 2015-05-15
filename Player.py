@@ -24,21 +24,21 @@ class Player():
 			cell.color.config(background="blue")
         
 	def setUpShips(self):
-		vertical = randint(0,1)
-		if vertical:
-			y = randint(0,8)
-			x = randint(0,9)
-			self.ocean[x][y].isShip = True
-			self.ocean[x][y].color.config(background = "grey")
-			self.ocean[x][y+1].isShip = True
-			self.ocean[x][y+1].color.config(background = "grey")
-		else:
-			x = randint(0,8)
-			y = randint(0,9)
-			self.ocean[x][y].isShip = True
-			self.ocean[x][y].color.config(background = "grey")
-			self.ocean[x+1][y].isShip = True
-			self.ocean[x+1][y].color.config(background = "grey")
+                ships = [2,3,3,4,5]
+                for i in ships:
+                    vertical = randint(0,1)
+                    if vertical:
+                            y = randint(0,9-i+1)
+                            x = randint(0,9)
+                            for j in range(i):
+                                self.ocean[x][y+j].isShip = True
+                                self.ocean[x][y+j].color.config(background = "grey")
+                    else:
+                            x = randint(0,9-i+1)
+                            y = randint(0,9)
+                            for j in range(i):
+                                self.ocean[x+j][y].isShip = True
+                                self.ocean[x+j][y].color.config(background = "grey")
 
 	
 class ComputerPlayer(Player):
@@ -58,14 +58,18 @@ class ComputerPlayer(Player):
 			
 	
 	def setUpShips(self):
-		vertical = randint(0,1)
-		if vertical:
-			y = randint(0,8)
-			x = randint(0,9)
-			self.ocean[x][y].isShip = True
-			self.ocean[x][y+1].isShip = True
-		else:
-			x = randint(0,8)
-			y = randint(0,9)
-			self.ocean[x][y].isShip = True
-			self.ocean[x+1][y].isShip = True
+                ships = [2,3,3,4,5]
+                for i in ships:
+                    vertical = randint(0,1)
+                    if vertical:
+                            y = randint(0,9-i+1)
+                            x = randint(0,9)
+                            for j in range(i):
+                                self.ocean[x][y+j].isShip = True
+                                self.ocean[x][y+j].color.config(background = "grey")
+                    else:
+                            x = randint(0,9-i+1)
+                            y = randint(0,9)
+                            for j in range(i):
+                                self.ocean[x+j][y].isShip = True
+                                self.ocean[x+j][y].color.config(background = "grey")

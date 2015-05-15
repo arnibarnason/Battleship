@@ -58,7 +58,7 @@ class Battleship(Frame):
     def callback(self, event, pos):
         self.player2.underAttack(pos)
         self.parent.update()
-        sleep(3)
+        sleep(1)
         self.player1.underAttack()
 """
     def setUpShips(self, event, pos):
