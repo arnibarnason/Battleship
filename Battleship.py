@@ -44,21 +44,26 @@ class Battleship(Frame):
 
         for i in range(10):
             for j in range(11,21):
-                k = (i, j)
+                #k = (i, j)
                 x = Label(self, relief=RAISED, width=4, height=2)
                 x.grid(row=i, column=j)
-#                x.bind("<Button-1>", lambda event, arg=k: self.setUpShips(event, arg))
+                #x.bind("<Button-1>", lambda event, arg=k: self.setUpShips(event, arg))
                 cell = Cell(False, False, x)
                 self.player1.addCellToOcean(cell, i)
         self.pack()
+
+        player1.setUpShips()
+        player2.setUpShips()
 
     def callback(self, event, pos):
         self.player2.underAttack(pos)
         self.parent.update()
         sleep(3)
         self.player1.underAttack()
-    
-
+"""
+    def setUpShips(self, event, pos):
+        self.player1.setUp(pos)
+"""
 def main():
 
     root = Tk()
