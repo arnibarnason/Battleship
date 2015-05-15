@@ -66,10 +66,8 @@ class ComputerPlayer(Player):
                             x = randint(0,9)
                             for j in range(i):
                                 self.ocean[x][y+j].isShip = True
-                                self.ocean[x][y+j].color.config(background = "grey")
                     else:
                             x = randint(0,9-i+1)
                             y = randint(0,9)
                             for j in range(i):
                                 self.ocean[x+j][y].isShip = True
-                                self.ocean[x+j][y].color.config(background = "grey")
