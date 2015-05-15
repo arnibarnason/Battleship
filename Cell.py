@@ -3,6 +3,7 @@
 
 class Cell():
 
-	def __init__(self, isShip, isHit):
+	def __init__(self, isShip, isHit, color):
 		self.isShip = isShip
 		self.isHit = isHit
+		self.color = color
