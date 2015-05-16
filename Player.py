@@ -10,6 +10,9 @@ class Player():
 		self.health = 17
 		self.ocean = [[] for i in range(10)]
 
+        def resetOcean(self):
+		self.ocean = [[] for i in range(10)]
+
 	def addCellToOcean(self, cell, x):
 		self.ocean[x].append(cell)
 	
@@ -17,7 +20,11 @@ class Player():
 		x = randint(0,9)
 		y = randint(0,9)
 		cell = self.ocean[x][y]
-		cell.isHit = True
+                while cell.isHit == True:
+                    x = randint(0,9)
+                    y = randint(0,9)
+                    cell = self.ocean[x][y]
+                cell.isHit = True
 		if cell.isShip:
 			cell.color.config(background="red")
 		else:
