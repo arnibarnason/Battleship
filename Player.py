@@ -7,7 +7,7 @@ class Player():
 	
 	def __init__(self):
 		self.hits = 0
-		self.health = 17
+		self.health = 2
 		self.ocean = [[] for i in range(10)]
 
         def resetOcean(self):
@@ -27,8 +27,12 @@ class Player():
                 cell.isHit = True
 		if cell.isShip:
 			cell.color.config(background="red")
+                        self.health -= 1
+                        if self.health == 0:
+                            return True
 		else:
 			cell.color.config(background="blue")
+                        return False
         
 	def setUpShips(self):
                 ships = [2,3,3,4,5]
@@ -71,8 +75,12 @@ class ComputerPlayer(Player):
 		cell.isHit = True
 		if cell.isShip:
 			cell.color.config(background="red")	
+                        self.health -= 1
+                        if self.health == 0:
+                            return True
 		else:
 			cell.color.config(background="blue")	
+                        return False
 			
 	
 	def setUpShips(self):

@@ -3,6 +3,7 @@
 from Tkinter import Tk, W, E, Label, Button, RAISED
 from ttk import Frame, Style
 from ttk import Entry
+import tkMessageBox
 from time import sleep
 from Player import Player, ComputerPlayer
 from Cell import Cell
@@ -15,7 +16,7 @@ class Battleship(Frame):
         self.parent = parent
         self.player1 = Player()
         self.player2 = ComputerPlayer()
-        self.started = False
+        self.isOver = True
         self.initUI()
 
     def initUI(self):
@@ -38,6 +39,7 @@ class Battleship(Frame):
 
 
     def setup(self):
+        self.isOver = False
         self.player1.resetOcean()
         self.player2.resetOcean()
         for i in range(10):
@@ -65,11 +67,17 @@ class Battleship(Frame):
 
 
     def callback(self, event, pos):
-        self.started = True
-        self.player2.underAttack(pos)
-        self.parent.update()
-        sleep(1)
-        self.player1.underAttack()
+        if not self.isOver:
+            if self.player2.underAttack(pos):
+                tkMessageBox.showinfo("VICTORY", "Congratulations, you WON!")
+                self.isOver = True
+            self.parent.update()
+            sleep(1)
+            if self.player1.underAttack():
+                tkMessageBox.showinfo("LOOOOSER", "All of your ships have been ruined!")
+                self.isOver = True
+        else:
+            tkMessageBox.showinfo("Reset", "The game is finished, you need to reset the game to continue")
 
 
 def main():
