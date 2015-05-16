@@ -7,7 +7,7 @@ class Player():
 	
 	def __init__(self):
 		self.hits = 0
-		self.health = 2
+		self.health = 17
 		self.ocean = [[] for i in range(10)]
 
         def resetOcean(self):
