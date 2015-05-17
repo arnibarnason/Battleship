@@ -1,6 +1,6 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
-from Tkinter import Tk, W, E, Label, Button, RAISED
+from Tkinter import Tk, W, E, S, N, Label, Button, RAISED
 from ttk import Frame, Style
 from ttk import Entry
 import tkMessageBox
@@ -24,26 +24,24 @@ class Battleship(Frame):
         self.parent.title("Battleship")
 
         for i in range(11):
-            self.columnconfigure(i)
-            self.rowconfigure(i)
+            self.columnconfigure(i, weight=1)
+            self.rowconfigure(i, weight=1)
         
         for i in range(10):
-            self.columnconfigure(i+11)
+            self.columnconfigure(i+11, weight=1)
         
         entry = Entry(self)
         self.setup()       
         
         x = Button(self, text="Reset", command=self.setup)
-        x.grid(row=11,column=14, columnspan=3)
+        x.grid(row=11,column=14, columnspan=3, sticky=N+S+E+W)
         self.pack()
-
 
     def setup(self):
         self.isOver = False
-        self.player1.resetOcean()
-        self.player2.resetOcean()
-        self.player1.health = 17
-        self.player2.health = 17
+        self.player1.resetPlayer()
+        self.player2.resetPlayer()
+
         for i in range(10):
             for j in range(10):
                 x = Label(self, relief=RAISED, width=4, height=2)
