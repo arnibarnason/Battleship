@@ -6,7 +6,9 @@ from random import randint
 class Player():
 	
 	def __init__(self):
-		self.hits = 0
+		self.lastHits = []
+                # Represents the direction the ship is placed (i.e. vertical or horizontal)
+                self.foundDirection = 0
 		self.health = 17
 		self.ocean = [[] for i in range(10)]
 
@@ -17,23 +19,48 @@ class Player():
 		self.ocean[x].append(cell)
 	
 	def underAttack(self):
-		x = randint(0,9)
-		y = randint(0,9)
+                (x, y, direction) = self.nextShot()
 		cell = self.ocean[x][y]
-                while cell.isHit == True:
-                    x = randint(0,9)
-                    y = randint(0,9)
-                    cell = self.ocean[x][y]
                 cell.isHit = True
 		if cell.isShip:
+                        self.foundDirection = direction
 			cell.color.config(background="red")
                         self.health -= 1
+                        self.lastHits.append((x, y))
                         if self.health == 0:
                             return True
 		else:
 			cell.color.config(background="blue")
                         return False
-        
+
+        def nextShot(self):
+            for i, j in self.lastHits:
+                if self.foundDirection == 1 or self.foundDirection == 0:
+                    if i != 9 and not self.ocean[i+1][j].isHit:
+                        print("infirst")
+                        return (i+1,j, 1)
+                if self.foundDirection == 1 or self.foundDirection == 0:
+                    if i != 0 and not self.ocean[i-1][j].isHit:
+                        print("insecond")
+                        return (i-1,j, 1)
+                if self.foundDirection == 2 or self.foundDirection == 0:
+                    if j != 9 and not self.ocean[i][j+1].isHit:
+                        print("inthird")
+                        return (i,j+1, 2)
+                if self.foundDirection == 2 or self.foundDirection == 0:
+                    if j != 0 and not self.ocean[i][j-1].isHit:
+                        print("infirst")
+                        return (i,j-1, 2)
+            x = randint(0,9)
+            y = randint(0,9)
+            print("hallo")
+            while self.ocean[x][y].isHit:
+                x = randint(0,9)
+                y = randint(0,9)
+            self.foundDirection = 0
+            self.lastHits = []
+            return (x, y, 0) 
+
 	def setUpShips(self):
                 ships = [2,3,3,4,5]
                 for i in ships:

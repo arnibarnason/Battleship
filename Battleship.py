@@ -42,6 +42,8 @@ class Battleship(Frame):
         self.isOver = False
         self.player1.resetOcean()
         self.player2.resetOcean()
+        self.player1.health = 17
+        self.player2.health = 17
         for i in range(10):
             for j in range(10):
                 x = Label(self, relief=RAISED, width=4, height=2)
