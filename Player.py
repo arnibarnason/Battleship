@@ -20,7 +20,6 @@ class Player():
             self.foundDirection = 0
             self.lastHits = []
             self.guessList = self.generateGuessList()
-            print(self.guessList)
 
 	def addCellToOcean(self, cell, x):
 		self.ocean[x].append(cell)

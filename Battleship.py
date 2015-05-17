@@ -75,6 +75,12 @@ class Battleship(Frame):
             sleep(1)
             if self.player1.underAttack():
                 tkMessageBox.showinfo("LOOOOSER", "All of your ships have been ruined!")
+                for i in range(10):
+                    for j in range(10):
+                        cell = self.player2.ocean[i][j]
+                        if cell.isShip and not cell.isHit:
+                            cell.color.config(background="green")
+
                 self.isOver = True
         else:
             tkMessageBox.showinfo("Reset", "The game is finished, you need to reset the game to continue")
