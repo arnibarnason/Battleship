@@ -67,11 +67,13 @@ class Battleship(Frame):
 
 
     def callback(self, event, pos):
+        self.parent.wm_title("Computers turn!")
         if not self.isOver:
             if self.player2.underAttack(pos):
                 tkMessageBox.showinfo("VICTORY", "Congratulations, you WON!")
                 self.isOver = True
             self.parent.update()
+            self.parent.wm_title("Your turn!")
             sleep(1)
             if self.player1.underAttack():
                 tkMessageBox.showinfo("LOOOOSER", "All of your ships have been ruined!")
