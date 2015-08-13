@@ -12,7 +12,6 @@ class Battleship(Frame):
 
     def __init__(self, parent):
         Frame.__init__(self, parent)   
-
         self.parent = parent
         self.player1 = Player()
         self.player2 = ComputerPlayer()
@@ -22,11 +21,11 @@ class Battleship(Frame):
     def initUI(self):
 
         self.parent.title("Battleship")
-
+		#initialize players cells 
         for i in range(11):
             self.columnconfigure(i, weight=1)
             self.rowconfigure(i, weight=1)
-        
+		#initialize computers cells
         for i in range(10):
             self.columnconfigure(i+11, weight=1)
         
@@ -41,20 +40,22 @@ class Battleship(Frame):
         self.isOver = False
         self.player1.resetPlayer()
         self.player2.resetPlayer()
-
+		#setup ocean and link left mouse button (button-1) to callback function
         for i in range(10):
             for j in range(10):
                 x = Label(self, relief=RAISED, width=4, height=2)
                 x.bind("<Button-1>", lambda event, arg=(i,j): self.callback(event, arg))
                 x.grid(row=i, column=j)
+				#initialize cell with isShip=isHit=false and label	
                 cell = Cell(False, False, x)
                 self.player2.addCellToOcean(cell, i)
 
         Label(self, text="Attack here!").grid(column=4, row=11, columnspan=3)
+		#init section between oceans
         for i in range(10):
             x = Label(self, width=2, height=2, background="black")
             x.grid(column=10, row=i)
-
+		#init computers attack ocean
         for i in range(10):
             for j in range(11,21):
                 x = Label(self, relief=RAISED, width=4, height=2)
@@ -65,15 +66,18 @@ class Battleship(Frame):
         self.player1.setUpShips()
         self.player2.setUpShips()
 
-
+	#callback is called when left mouse button clicks onto a cell in players attack ocean
     def callback(self, event, pos):
         self.parent.wm_title("Computers turn!")
         if not self.isOver:
+			#underAttack returns true when health is zero	
             if self.player2.underAttack(pos):
                 tkMessageBox.showinfo("VICTORY", "Congratulations, you WON!")
                 self.isOver = True
+			#post attack
             self.parent.update()
             self.parent.wm_title("Your turn!")
+			#sleep for 1 second between turns, as if computer was thinking
             sleep(1)
             if self.player1.underAttack():
                 tkMessageBox.showinfo("LOOOOSER", "All of your ships have been ruined!")

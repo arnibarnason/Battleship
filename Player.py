@@ -19,16 +19,19 @@ class Player():
             self.health = 17
             self.foundDirection = 0
             self.lastHits = []
+			#guessList contains cells where there might be a ship
             self.guessList = self.generateGuessList()
-
+	#cell is each square in grid and ocean is the grid
 	def addCellToOcean(self, cell, x):
 		self.ocean[x].append(cell)
-	
+	#generate attack on players ships from computer	
 	def underAttack(self):
+	#next shot returns an educated guess where ship might be and if lies vertically or horizontally
                 (x, y, direction) = self.nextShot()
 		cell = self.ocean[x][y]
                 cell.isHit = True
 		if cell.isShip:
+			#the computer hit a ship
                         self.foundDirection = direction
 			cell.color.config(background="red")
                         self.health -= 1
@@ -36,9 +39,10 @@ class Player():
                         if self.health == 0:
                             return True
 		else:
+			#the computer missed
 			cell.color.config(background="blue")
                         return False
-
+		#AI function for computer
         def nextShot(self):
             for i, j in self.lastHits:
                 if self.foundDirection == 1 or self.foundDirection == 0:
@@ -56,11 +60,13 @@ class Player():
 
             lenGuessList = len(self.guessList)
             if not lenGuessList is 0:
+				#guessList is not empty, so computer can make an educated guess
                 (x, y) = self.guessList.pop(randint(0, lenGuessList - 1))
                 while self.ocean[x][y].isHit:
                     lenGuessList = len(self.guessList)
                     (x, y) = self.guessList.pop(randint(0, lenGuessList - 1))
             else:
+				#guesslist is empty so computer attacks a random non-hit cell in ocean
                 x = randint(0,9)
                 y = randint(0,9)
                 while self.ocean[x][y].isHit:
@@ -97,11 +103,12 @@ class Player():
 
             return returnList
 
-
+	#place ships on ocean, unfortunately it is random for both player and computer
 	def setUpShips(self):
                 ships = [2,3,3,4,5]
                 for i in ships:
                     vertical = randint(0,1)
+					#overlap variable helps to make ships non-overlapping
                     overlap = True
                     while overlap:
                         overlap = False
@@ -112,10 +119,12 @@ class Player():
                                     if self.ocean[x][y+j].isShip == True:
                                         overlap = True
                                 if not overlap:
+									#place ship in position
                                     for j in range(i):
                                         self.ocean[x][y+j].isShip = True
                                         self.ocean[x][y+j].color.config(background = "grey")
                         else:
+								#ship will lie horizontally
                                 x = randint(0,9-i+1)
                                 y = randint(0,9)
                                 for j in range(i):
@@ -131,12 +140,13 @@ class ComputerPlayer(Player):
 	
 	def __init__(self):
 		Player.__init__(self)
-
+	#place attack on players attack ocean according to selected cell with coordinates
 	def underAttack(self, coordinates):
 		x = coordinates[0]
 		y = coordinates[1]
 		cell = self.ocean[x][y]
 		cell.isHit = True
+		#change color to red if there is a ship there and to blue if not
 		if cell.isShip:
 			cell.color.config(background="red")	
                         self.health -= 1
@@ -146,7 +156,7 @@ class ComputerPlayer(Player):
 			cell.color.config(background="blue")	
                         return False
 			
-	
+	#same as setupShips for player except they are not visible on players attack ocean	
 	def setUpShips(self):
                 ships = [2,3,3,4,5]
                 for i in ships:
